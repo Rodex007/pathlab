@@ -123,64 +123,90 @@ The application is organized into the following functional modules:
 
 ## Project Structure
 ```
-pathology-lab-backend-new/
-├── src/main/java/com/pathlab/
-│ ├── controller/ # REST API endpoints
-│ │ ├── AuthController
-│ │ ├── PatientController
-│ │ ├── PatientClientController
-│ │ ├── BookingsController
-│ │ ├── TestsController
-│ │ ├── SampleController
-│ │ ├── PaymentController
-│ │ ├── BookingResultsController
-│ │ └── DashboardController
-│ ├── service/ # Business logic
-│ │ ├── AuthService
-│ │ ├── PatientService
-│ │ ├── BookingService
-│ │ ├── TestService
-│ │ ├── SampleService
-│ │ ├── PaymentService
-│ │ ├── TestResultService
-│ │ ├── PdfService
-│ │ ├── EmailService
-│ │ └── DashboardService
-│ ├── repository/ # Data access layer
-│ │ ├── UserRepository
-│ │ ├── PatientRepository
-│ │ ├── BookingRepository
-│ │ ├── TestEntityRepository
-│ │ ├── SampleRepository
-│ │ ├── PaymentRepository
-│ │ └── Others...
-│ ├── entity/ # Domain models
-│ │ ├── User
-│ │ ├── Patient
-│ │ ├── Booking
-│ │ ├── TestEntity
-│ │ ├── Sample
-│ │ ├── TestResult
-│ │ ├── Payment
-│ │ └── enums/ # Status enumerations
-│ ├── dto/ # Data Transfer Objects
-│ │ ├── auth/
-│ │ ├── patient/
-│ │ ├── booking/
-│ │ ├── sample/
-│ │ ├── payment/
-│ │ ├── result/
-│ │ ├── client/
-│ │ └── dashboard/
-│ ├── mapper/ # Entity to DTO mappers
-│ ├── security/ # Security configuration and JWT handling
-│ └── PathLabApplication.java # Spring Boot entry point
-├── src/main/resources/
-│ ├── application.properties # Configuration properties
-│ ├── db/migration/ # Flyway SQL migrations
-│ └── templates/ # Freemarker templates for PDFs and emails
-├── pom.xml # Maven configuration
-├── Dockerfile # Docker image configuration
-└── mvnw / mvnw.cmd # Maven wrapper scripts
+pathlab-backend/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/pathlab/
+│   │   │       ├── config/                 # Application & security configuration
+│   │   │       │   ├── SecurityConfig.java
+│   │   │       │   ├── CorsConfig.java
+│   │   │       │   └── FreemarkerConfig.java
+│   │   │       │
+│   │   │       ├── controller/             # REST API controllers
+│   │   │       │   ├── AuthController.java
+│   │   │       │   ├── PatientController.java
+│   │   │       │   ├── BookingsController.java
+│   │   │       │   ├── SampleController.java
+│   │   │       │   ├── PaymentController.java
+│   │   │       │   ├── BookingResultsController.java
+│   │   │       │   └── DashboardController.java
+│   │   │       │
+│   │   │       ├── dto/                    # API request/response models
+│   │   │       │   ├── auth/
+│   │   │       │   ├── booking/
+│   │   │       │   ├── patient/
+│   │   │       │   ├── payment/
+│   │   │       │   ├── result/
+│   │   │       │   └── dashboard/
+│   │   │       │
+│   │   │       ├── entity/                 # JPA domain entities
+│   │   │       │   ├── User.java
+│   │   │       │   ├── Patient.java
+│   │   │       │   ├── Booking.java
+│   │   │       │   ├── Sample.java
+│   │   │       │   ├── TestEntity.java
+│   │   │       │   ├── TestResult.java
+│   │   │       │   ├── Payment.java
+│   │   │       │   └── enums/              # Domain enumerations
+│   │   │       │
+│   │   │       ├── repository/             # Spring Data JPA repositories
+│   │   │       │   ├── UserRepository.java
+│   │   │       │   ├── PatientRepository.java
+│   │   │       │   ├── BookingRepository.java
+│   │   │       │   ├── SampleRepository.java
+│   │   │       │   ├── TestEntityRepository.java
+│   │   │       │   └── PaymentRepository.java
+│   │   │       │
+│   │   │       ├── service/                # Business logic layer
+│   │   │       │   ├── AuthService.java
+│   │   │       │   ├── PatientService.java
+│   │   │       │   ├── BookingService.java
+│   │   │       │   ├── SampleService.java
+│   │   │       │   ├── TestService.java
+│   │   │       │   ├── TestResultService.java
+│   │   │       │   ├── PaymentService.java
+│   │   │       │   ├── DashboardService.java
+│   │   │       │   ├── EmailService.java
+│   │   │       │   └── PdfService.java
+│   │   │       │
+│   │   │       ├── security/               # JWT authentication & filters
+│   │   │       │   └── JwtAuthenticationFilter.java
+│   │   │       │
+│   │   │       ├── exception/              # Global exception handling
+│   │   │       │   └── GlobalExceptionHandler.java
+│   │   │       │
+│   │   │       ├── util/                   # Utility helpers
+│   │   │       │   ├── JwtUtil.java
+│   │   │       │   └── DateUtils.java
+│   │   │       │
+│   │   │       └── PathLabApplication.java # Spring Boot entry point
+│   │   │
+│   │   └── resources/
+│   │       ├── application.properties     # Application configuration
+│   │       ├── db/
+│   │       │   └── migration/              # Flyway database migrations
+│   │       │       └── V1__init.sql
+│   │       └── templates/                  # Freemarker templates
+│   │           ├── email/
+│   │           │   ├── verification.html
+│   │           │   └── report-template.html
+│   │           ├── invoice.ftl
+│   │           └── report.ftl
+│
+├── Dockerfile                             # Docker image configuration
+├── pom.xml                                # Maven dependencies & build config
+├── mvnw / mvnw.cmd                        # Maven wrapper
+└── README.md
 
 ```
