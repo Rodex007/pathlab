@@ -210,3 +210,178 @@ pathlab-backend/
 └── README.md
 
 ```
+
+## Getting Started
+
+### Prerequisites
+
+- Java 21 or later (Eclipse Temurin recommended)
+- Maven 3.9.9 or later
+- PostgreSQL 12 or later
+- Git
+
+### Environment Setup
+
+1. **Install PostgreSQL and create a database:**
+
+   ```bash
+   createdb pathlab
+   ```
+2. **Clone the repository:**
+   ```bash
+   git clone https://github.com/CodeInn30/pathology-lab-backend-new.git
+   cd pathology-lab-backend-new
+   ```
+3. **Create a .env file or set environment variables (see Environment Variables section)**
+
+### Installation Steps
+
+1. **Build the application using Maven:**
+   ```bash
+   ./mvnw clean package
+   ```
+   *On Windows:*
+   ```bash
+   mvnw. cmd clean package
+   ```
+2. **Run the application:**
+   ```bash
+   ./mvnw spring-boot:run
+   ```
+   *Or after packaging:*
+   ```bash
+   java -jar target/pathlab-0.0.1-SNAPSHOT. jar
+   ```
+3. **Access the API:**
+   * Base URL: http://localhost:8080
+   * API documentation available at: http://localhost:8080/swagger-ui.html (if Swagger is configured)
+  
+## Environment Variables
+**Configure the following environment variables in application.properties or system environment:**
+
+***Database Configuration***
+```code
+DB_URL=jdbc:postgresql://localhost:5432/pathlab
+DB_USERNAME=postgres
+DB_PASSWORD=your_password
+```
+
+***Cloudinary Configuration***
+```code
+CLOUDINARY_CLOUD_NAME=your-cloud-name
+CLOUDINARY_API_KEY=your-api-key
+CLOUDINARY_API_SECRET=your-api-secret
+```
+
+***Email Configuration***
+```bash
+MAIL_USERNAME=your-email@gmail.com
+MAIL_PASSWORD=your-app-password
+```
+
+***Security & JWT***
+```code
+JWT_SECRET_BASE64=your-base64-encoded-secret
+```
+
+***Application URLs***
+```code
+PUBLIC_BASE_URL=http://localhost:5173
+```
+
+## Development Workflow
+
+**Running Tests**
+```bash
+./mvnw test
+```
+
+**Building the Application**
+```bash
+./mvnw clean package -DskipTests
+```
+
+**Running Specific Services**
+The application is a monolithic Spring Boot service. All modules run together, but you can test specific APIs:
+
+***Authentication:***
+```bash
+POST /api/auth/register/patient
+POST /api/auth/register/user
+POST /api/auth/login
+POST /api/auth/logout
+GET /api/auth/verify-email? token=...
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+```
+
+***Patient Management:***
+```bash
+GET /api/patients
+GET /api/patients/{id}
+POST /api/patients
+PUT /api/patients/{id}
+DELETE /api/patients/{id}
+```
+
+***Bookings:***
+```bash
+GET /api/bookings
+GET /api/bookings/{id}
+POST /api/bookings
+PUT /api/bookings/{id}
+DELETE /api/bookings/{id}
+```
+
+***Test Results & PDF Generation:***
+```bash
+POST /api/bookings/{bookingId}/tests/{testId}/results
+GET /api/bookings/{bookingId}/results
+GET /api/bookings/{bookingId}/results/pdf
+GET /api/payments/{id}/invoice/pdf
+```
+
+***Useful Commands***
+```bash
+# Clean build
+./mvnw clean
+
+# Compile
+./mvnw compile
+
+# Run tests
+./mvnw test
+
+# Package without tests
+./mvnw package -DskipTests
+
+# View dependency tree
+./mvnw dependency:tree
+
+# Format code
+./mvnw spotless:apply
+```
+
+## Deployment Notes
+
+**Docker Deployment**
+The repository includes a multi-stage Dockerfile for containerization:
+
+1. ***Build the Docker image:***
+   
+   ```bash
+   docker build -t pathlab-backend: latest .
+   ```
+  
+2. ***Run the container:***
+   ```bash
+   docker run -d \
+        -p 8080:8080 \
+        -e DB_URL=jdbc:postgresql://postgres:5432/pathlab \
+        -e DB_USERNAME=postgres \
+        -e DB_PASSWORD=your_password \
+        -e MAIL_USERNAME=your-email@gmail.com \
+        -e MAIL_PASSWORD=your-app-password \
+        -e JWT_SECRET_BASE64=your-secret \
+        pathlab-backend:latest
+   ```
